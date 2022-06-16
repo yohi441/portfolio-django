@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirilo Intong Jr.</title>  
+
+
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    <script src="{% static 'js/typed.js' %}"></script>
+    <script defer src="{% static 'js/alpine-intersect.min.js' %}"></script>
+    <script defer src="{% static 'js/alpine.min.js' %}"></script>
+    <script defer src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
+
+
+    
+</head>
+
+
+<style>
+    [x-cloak] { display: none !important; }
+    
+    .htmx-settling img {
+        opacity: 0;
+      }
+      img {
+       transition: opacity 300ms ease-in;
+      }
+</style>
+
+<body class="font-mono">
+
+    
+    {% block content %}
+    {% endblock content%}
+    
+
+    <script src="{% static 'js/store.js' %}"></script>
+
+</body>
+
+<script src="{% static 'js/typed-string.js' %}"></script>
+
+</html>

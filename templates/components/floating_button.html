@@ -1,0 +1,23 @@
+<!--floating button-->
+<button
+    x-cloak
+    x-data
+    x-show="$store.portfolio.scroll"
+    x-on:click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    type="button"
+    class="fixed inline-block p-3 text-xs font-medium leading-tight text-white uppercase transition duration-150 ease-in-out bg-[#6D6A75] rounded-full shadow-md hover:bg-[#A19FA8] hover:shadow-lg focus:bg-[#3B3A40] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#313036] active:shadow-lg bottom-5 right-5"
+    x-transition.opacity
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-6 h-6 md:w-8 md:h-8"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+    >
+        <path
+        fill-rule="evenodd"
+        d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+        clip-rule="evenodd"
+        />
+    </svg>
+</button>

@@ -1,0 +1,395 @@
+{% load static %}
+
+<!--About-->
+<div
+    id="link-2"
+    x-data
+    x-intersect.half="$store.portfolio.openTab=2"
+    class="container px-5 py-20 mx-auto -z-10"
+>
+
+    <!--wrapper-of-2-coloumns-->
+    <div class="flex items-center justify-center max-w-6xl mx-auto mt-2">
+
+        <!--wrapper-to-control-max-width-->
+        <div class="flex flex-col md:flex-row md:space-x-10">
+
+
+            <!--1st col-->
+            <div
+                x-bind:class="{'opacity-0':!$store.portfolio.showAboutCol}"
+                x-intersect.half="$store.portfolio.showAboutCol=true"
+                class="mb-10 transition-opacity duration-1000 ease-in md:mb-0"
+            >
+            
+                <h2 class="text-3xl font-semibold text-center text-white md:text-4xl">
+                    About me
+                </h2>
+                <div class="mt-4 text-base font-medium text-justify md:text-lg text-neutral-400">
+                    <p>
+                        <strong class="text-xl text-white">I'm Cirilo Intong Jr.</strong>  I'm a full-stack web developer.  
+                    </p>
+                    <br>
+                    <p>I'm using Python and Django web framework but still exploring 
+                        other technologies and frameworks that catch my interest.</p>
+                    <br>
+                    <p class="">
+                        I am an enthusiastic learner, open to any opportunity to learn and grow as a developer. 
+                        
+                    </p>
+                    <br>
+                    <p>I'm open to new opportunities to join a team to dedicate myself full-time  
+                        to creating awesome things.</p>
+                </div>
+            
+            </div>
+            
+            
+            <!--2nd col-->
+            <div 
+                x-data="{
+                frontend:true, 
+                backend:false,
+                tools:false,
+                }"
+
+                x-bind:class="{'opacity-0': !$store.portfolio.showAboutCol2}"
+                x-intersect.half="$store.portfolio.showAboutCol2=true"
+                class="w-full text-center transition-opacity duration-1000 ease-out"
+            >
+            
+                <h2 class="mt-10 text-3xl font-semibold text-center text-white md:mt-0 md:text-right md:pr-28 md:text-4xl">Skills</h2>
+                <!--skill list-->
+                <div 
+                    class="flex justify-center mt-4 space-x-5 text-xl md:justify-end md:pr-10 text-neutral-400"
+                >
+                    <!--frontend-->
+                    <div
+                        x-on:mouseover="setTimeout(() => {
+                            frontend=true, backend=false, tools=false
+                        }, 200)"
+                        x-on:click="frontend=true,backend=false, tools=false"
+                        x-bind:class="{'link-active': frontend}"
+                        class="pb-2 font-semibold cursor-pointer link-underline link-underline-red"
+                    >
+                        Frontend
+                    </div>
+            
+                    <!--backend-->
+                    <div
+                        x-on:mouseover="setTimeout(() => {
+                            backend=true,frontend=false,tools=false
+                        }, 200)"
+                        x-on:click="backend=true,frontend=false,tools=false"
+                        x-bind:class="{'link-active': backend}"                   
+                        class="pb-2 font-semibold cursor-pointer link-underline link-underline-red"
+                    >
+                        Backend
+                    </div>
+                    <!--tools-->
+                    <div 
+                        x-on:mouseover="setTimeout(() => {
+                            tools=true, backend=false, frontend=false
+                        }, 200)"
+                        x-on:click="tools=true, backend=false, frontend=false"
+                        x-bind:class="{'link-active': tools}"
+                        class="pb-2 font-semibold cursor-pointer link-underline link-underline-red"
+                    >
+                        Tools
+                    </div>
+
+                </div>
+
+                <!--logo wrapper-->
+                <div class="flex justify-center md:justify-end text-neutral-400">
+                    <!--frontend-->
+                    <div 
+                        class="grid grid-cols-4 gap-4 mt-3 text-xs -pr-2"
+                        x-show="frontend"
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-500"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                    >
+                        <!--javascript-->                       
+                        <a href="https://www.javascript.com/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    class="w-12 h-12 overflow-hidden" 
+                                    hx-get="{% url 'javascript_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Javascript</div>
+                            </div>
+                        </a>
+                    
+                        <!--css-->
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'css_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Css</div>
+                            </div>
+                        </a>
+                        <!--html-->
+                        <a href="https://html.com/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'html_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Html</div>
+                            </div>
+                        </a>
+                        
+                
+                        <!--vuejs-->
+                        <a href="https://vuejs.org/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'vue_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Vue</div>
+                            </div>
+                        </a>
+                
+                        <!--tailwindcss-->
+                        <a href="https://tailwindcss.com/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'tailwind_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Tailwind</div>
+                            </div>
+                        </a>
+                
+                        <!--alpinejs-->
+                        <a href="https://alpinejs.dev/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div
+                                    hx-get="{% url 'alpine_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"  
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Alpine</div>
+                            </div>
+                        </a>
+                
+                        <!--htmx-->
+                        <a href="https://htmx.org/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'htmx_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                
+                                </div>
+                                <div class="flex items-center justify-center">Htmx</div>
+                            </div>
+                        </a>
+                    
+                    </div>
+
+
+                    <!--Backend-->
+                    <div 
+                        class="grid grid-cols-4 gap-4 mt-3 text-xs -pl-2"
+                        x-show="backend"                  
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-500"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                    >
+                        <!--python-->
+                        <a href="https://www.python.org/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'python_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load"
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Python</div>
+                            </div>
+                        </a>
+                
+                        <!--django-->
+                        <a href="https://www.djangoproject.com/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'django_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load" 
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Django</div>
+                            </div>
+                        </a>
+                        <!--postgresql-->
+                        <a href="https://www.postgresql.org/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'postgresql_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load" 
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Postgresql</div>
+                            </div>
+                        </a>
+                    
+                        <!--redis-->
+                        <a href="https://redis.io/" target="_blank">
+                            <div class="flex flex-col items-center justify-center p-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'redis_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load" 
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Redis</div>
+                            </div>
+                        </a>
+                    
+                    </div>
+                
+                    <!--tools-->
+                    <div 
+                        class="grid grid-cols-2 gap-4 mx-auto mt-3 text-xs"
+                        x-show="tools"
+                        x-cloak
+                        x-transition:enter="transition ease-out duration-500"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                    >
+                        <!--git-->
+                        <a href="https://git-scm.com/" target="_blank">
+                            <div class="flex flex-col items-center justify-center px-3 py-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div
+                                    hx-get="{% url 'git_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load" 
+                                    class="w-12 h-12 overflow-hidden"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Git</div>
+                            </div>
+                        </a>
+                    
+                        <!--linux-->
+                        <a href="https://www.linux.org/" target="_blank">
+                            <div class="flex flex-col items-center justify-center px-3 py-1 space-y-1 transition-colors duration-500 cursor-pointer hover:bg-gray-200 hover:bg-opacity-10">
+                                <div 
+                                    hx-get="{% url 'linux_lazy' %}"
+                                    hx-swap="innerHTML"
+                                    hx-target="this"
+                                    hx-trigger="load" 
+                                    class="w-12 h-12 overflow-hidden rounded-sm"
+                                >
+                                    <svg role="status" class="w-8 h-8 mx-auto my-auto text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                                <div class="flex items-center justify-center">Linux</div>
+                            </div>
+                        </a>
+                    
+                    </div>
+                </div>
+            
+            
+            </div>
+
+        </div>
+
+    </div>  
+
+
+</div>

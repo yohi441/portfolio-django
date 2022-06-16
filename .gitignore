@@ -1,0 +1,11 @@
+node_modules/
+.env
+input.css
+tailwind.config.js
+package-lock.json
+package.json
+config/.env
+db.sqlite3
+.pytest_cache
+.git
+
