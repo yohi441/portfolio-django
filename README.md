@@ -12,4 +12,4 @@ This project was created with:
 This project is hosted:
 * google cloud platform
 
-The link of the app https://cirilojr-intong <br />
+The link of the app https://cirilojr-intong.site <br />
