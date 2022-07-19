@@ -29,7 +29,7 @@ def index(request):
 def send_contact_email(request):
     if request.htmx:
         if request.method == "POST":
-            time.sleep(1)
+            
             form = ContactForm(request.POST)
             if form.is_valid():    
                 name = form.cleaned_data['name']
@@ -38,7 +38,7 @@ def send_contact_email(request):
                 
                 try:
                     send_mail(
-                        f"Message from {name.capitalize()} through portfolio",
+                        f"Message from {name}. Email: {email}",
                         f"{message}",
                         f"{email}",
                         ['rikou92991@gmail.com'],
