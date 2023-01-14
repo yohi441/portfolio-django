@@ -3,7 +3,7 @@
 This is my personal portfolio
 
 This project was created with:
-* python
+* python 3.8.10
 * tailwindcss
 * django
 * htmx
