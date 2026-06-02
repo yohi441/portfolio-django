@@ -9,7 +9,3 @@ This project was created with:
 * htmx
 * alpine.js
 
-This project is hosted:
-* google cloud platform
-
-The link of the app https://cirilojr-intong.site <br />
