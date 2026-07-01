@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-django",
+  "version": "1.0.0",
+  "description": "This is my personal portfolio",
+  "homepage": "https://github.com/yohi441/portfolio-django#readme",
+  "bugs": {
+    "url": "https://github.com/yohi441/portfolio-django/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yohi441/portfolio-django.git"
+  },
+  "license": "ISC",
+  "author": "yohi",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i static/css/input.css -o static/css/output.css",
+    "watch:css": "npx tailwindcss -i static/css/input.css -o static/css/output.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindscss": "^0.3.0"
+  }
+}
