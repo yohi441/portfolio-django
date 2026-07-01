@@ -78,12 +78,12 @@
   animation: fade-in 1s;
 }
 
-.htmx-request.my-indicator {
+form.htmx-request .my-indicator {
   display: block;
   animation: fade-in 1s;
 }
 
-.htmx-request.current-btn {
+form.htmx-request .current-btn {
   display: none;
   animation: fade-out 1s;
 }

@@ -3,7 +3,7 @@
 <!--Portfolio Section-->
 <div
     x-data
-    id="link-3"
+    id="link-4"
     class="container flex flex-col items-center px-5 py-20 mx-auto text-gray-800"
 >
     <!--subtitle-->
@@ -19,7 +19,7 @@
        
         <!--first-->
         <div 
-            x-intersect.half="$store.portfolio.openTab=3"
+            x-intersect.half="$store.portfolio.openTab=4"
             class="flex flex-col mt-9 md:flex-row md:space-x-5"  
         >
             <!--col-1-->
@@ -78,7 +78,9 @@
 
 
         <!--second-->
-        <div class="flex flex-col mt-9 md:flex-row md:space-x-5">
+        <div
+        x-intersect.half="$store.portfolio.openTab=4"
+         class="flex flex-col mt-9 md:flex-row md:space-x-5">
             <!--col-1-->
             <div
                 x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio2Col1}"
@@ -141,7 +143,7 @@
 
         <!--third-->
         <div
-            x-intersect.half="$store.portfolio.openTab=3"
+             x-intersect.half="$store.portfolio.openTab=4"
             class="flex flex-col mt-9 md:flex-row md:space-x-5">
             <!--col-1-->
             <div

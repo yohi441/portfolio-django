@@ -4,7 +4,7 @@
     x-data
     x-cloak
     x-on:scroll.window="$store.portfolio.MobileDropdown=false, $store.portfolio.scrolled(), $store.portfolio.scrollToBottom()"
-    class="container w-full px-5 py-2 mx-auto font-semibold text-white"
+    class="container w-full px-5 py-4 mx-auto font-semibold text-white"
 >
     <!--navbar-->
     <nav
@@ -19,7 +19,7 @@
             
             <button
                 x-bind:class="{'open' : $store.portfolio.MobileDropdown}"  
-                class="focus:outline-none hamburger"
+                class="focus:outline-none hamburger p-3"
             >
                 <span class="hamburger-top"></span>
                 <span class="hamburger-middle"></span>
@@ -81,21 +81,28 @@
         </li>
         <li
             class="py-1 cursor-pointer link-underline link-underline-red"
-            x-bind:class="{ 'link-active': $store.portfolio.openTab == 5 }"
-            x-on:click="$store.portfolio.openTab=5, document.getElementById('link-5').scrollIntoView()"
+            x-bind:class="{ 'link-active': $store.portfolio.openTab == 3 }"
+            x-on:click="$store.portfolio.openTab=3, document.getElementById('link-3').scrollIntoView()"
         >
             Experience
         </li>
         <li
-            x-bind:class="{ 'link-active': $store.portfolio.openTab == 3 }"
-            x-on:click="$store.portfolio.openTab = 3, document.getElementById('link-3').scrollIntoView()"
+            x-bind:class="{ 'link-active': $store.portfolio.openTab == 4 }"
+            x-on:click="$store.portfolio.openTab = 4, document.getElementById('link-4').scrollIntoView()"
             class="py-1 cursor-pointer link-underline link-underline-red"
         >
             Portfolio
         </li>
         <li
-            x-bind:class="{ 'link-active': $store.portfolio.openTab == 4 }"
-            x-on:click="$store.portfolio.openTab = 4, document.getElementById('link-4').scrollIntoView()"
+            x-bind:class="{ 'link-active': $store.portfolio.openTab == 5 }"
+            x-on:click="$store.portfolio.openTab = 5, document.getElementById('link-5').scrollIntoView()"
+            class="py-1 cursor-pointer link-underline link-underline-red"
+        >
+            Learning
+        </li>
+        <li
+            x-bind:class="{ 'link-active': $store.portfolio.openTab == 6 }"
+            x-on:click="$store.portfolio.openTab = 6, document.getElementById('link-6').scrollIntoView()"
             class="py-1 cursor-pointer link-underline link-underline-red"
         >
             Contact
