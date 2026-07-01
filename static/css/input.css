@@ -97,3 +97,15 @@ form.htmx-request .current-btn {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+.errorlist {
+  list-style: none;
+  margin: 0 0 0.25rem 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: rgb(220 38 38);
+}
+
+.errorlist li {
+  padding: 0.125rem 0;
+}
