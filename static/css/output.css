@@ -27,6 +27,7 @@
     --color-zinc-950: oklch(14.1% 0.005 285.823);
     --color-neutral-300: oklch(87% 0 0);
     --color-neutral-400: oklch(70.8% 0 0);
+    --color-neutral-500: oklch(55.6% 0 0);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -876,6 +877,11 @@
   .decoration-red-600 {
     text-decoration-color: var(--color-red-600);
   }
+  .placeholder-neutral-500 {
+    &::placeholder {
+      color: var(--color-neutral-500);
+    }
+  }
   .opacity-0 {
     opacity: 0%;
   }
@@ -1030,6 +1036,11 @@
         --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
         box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
       }
+    }
+  }
+  .focus\:border-red-600 {
+    &:focus {
+      border-color: var(--color-red-600);
     }
   }
   .focus\:bg-\[\#3B3A40\] {
