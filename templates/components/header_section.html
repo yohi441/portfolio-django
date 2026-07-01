@@ -80,6 +80,13 @@
             About
         </li>
         <li
+            class="py-1 cursor-pointer link-underline link-underline-red"
+            x-bind:class="{ 'link-active': $store.portfolio.openTab == 5 }"
+            x-on:click="$store.portfolio.openTab=5, document.getElementById('link-5').scrollIntoView()"
+        >
+            Experience
+        </li>
+        <li
             x-bind:class="{ 'link-active': $store.portfolio.openTab == 3 }"
             x-on:click="$store.portfolio.openTab = 3, document.getElementById('link-3').scrollIntoView()"
             class="py-1 cursor-pointer link-underline link-underline-red"

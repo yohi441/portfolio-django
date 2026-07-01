@@ -6,6 +6,9 @@ document.addEventListener('alpine:init', () => {
         scrollEnd: false,
         showAboutCol: false,
         showAboutCol2: false,
+        showExp1: false,
+        showExp2: false,
+        showLearning: false,
         showPortfolioCol1: false,
         showPortfolioCol2: false,
         showPortfolio2Col1: false,
@@ -24,6 +27,9 @@ document.addEventListener('alpine:init', () => {
                 this.scroll = false
                 this.showAboutCol = false
                 this.showAboutCol2 = false
+                this.showExp1 = false
+                this.showExp2 = false
+                this.showLearning = false
                 this.showPortfolioCol1 =  false
                 this.showPortfolioCol2 =  false
                 this.showPortfolio2Col1 = false,

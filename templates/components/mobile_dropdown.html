@@ -42,6 +42,18 @@
         </li>
 
         <li 
+            class="flex cursor-pointer"
+            x-on:click="$store.portfolio.openTab=5, document.getElementById('link-5').scrollIntoView()"
+        >
+            <p
+                x-bind:class="{ 'link-active': $store.portfolio.openTab == 5 }"
+                class="pb-1 link-underline link-underline-red" 
+            >
+                Experience
+            </p>
+        </li>
+
+        <li 
             class="flex cursor-pointer"          
             x-on:click="$store.portfolio.openTab=3, document.getElementById('link-3').scrollIntoView()"
         >
