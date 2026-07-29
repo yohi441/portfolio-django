@@ -8,7 +8,6 @@
 >
     <!--subtitle-->
     <div  
-        
         class="flex items-center justify-center mt-10 text-4xl font-semibold text-white md:my-10"
     >
         PORTFOLIO
@@ -16,15 +15,14 @@
 
     <!--wrapper-->
     <div class="flex flex-col max-w-6xl mt-10">
-       
-        <!--first-->
+
+        <!-- ==================== PROJECT 1: MyBooksite ==================== -->
         <div 
             x-intersect.half="$store.portfolio.openTab=4"
             class="flex flex-col mt-9 md:flex-row md:space-x-5"  
         >
             <!--col-1-->
             <div
-                
                 x-bind:class="{'opacity-0':!$store.portfolio.showPortfolioCol1}"
                 x-intersect.half="$store.portfolio.showPortfolioCol1=true"
                 class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
@@ -37,21 +35,20 @@
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">alpine.js</div>
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">postgresql</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">drf</div>
                 </div>
                 
                 <p class="mt-2 text-base md:text-justify">
-                    It's an e-commerce web app that sells books. It has
-                    the basic functionality of an e-commerce site. It has
-                    basic authentication and add to cart function.
-                    It uses htmx for ajax call and alpine.js for dropdowns.
+                    It's an e-commerce web app that sells books. 
+                    It has the basic functionality of an e-commerce site including authentication and cart management with HTMX-driven interactions. 
+                    Additional API endpoints with Swagger documentation are available via Django REST Framework. 
+                    Uses Alpine.js for dropdowns and interactive elements.
                 </p>
 
                 <div class="flex mt-2 space-x-2">
-                    
                     <a x-data x-on:click.stop href="https://github.com/yohi441/mybooksite-demo" target="_blank">
                         <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
                     </a>
-
                 </div>
                 
             </div>
@@ -73,50 +70,47 @@
                     </svg>
                 </div>
             </div>
-        
         </div>
 
 
-        <!--second-->
-        <div
-        x-intersect.half="$store.portfolio.openTab=4"
-         class="flex flex-col mt-9 md:flex-row md:space-x-5">
+        <!-- ==================== PROJECT 2: Django Job Board API ==================== -->
+        <div 
+            x-intersect.half="$store.portfolio.openTab=4"
+            class="flex flex-col mt-9 md:flex-row md:space-x-5"
+        >
             <!--col-1-->
             <div
                 x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio2Col1}"
                 x-intersect.half="$store.portfolio.showPortfolio2Col1=true"
                 class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
             >
-                <h2 class="text-2xl font-semibold text-white md:text-3xl">Chatapp</h2>
-                <div class="flex flex-wrap w-64 mt-1 mb-2 overflow-hidden text-xs">
-
+                <h2 class="text-2xl font-semibold text-white md:text-3xl">Django Job Board API</h2>
+                <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">drf</div>
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">python</div>
-                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">htmx</div>
-                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">alpine.js</div>
                     <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">postgresql</div>
-                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
-                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">redis</div>
-                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django-channels</div>
-                
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">jwt</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">celery</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">minio</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">docker</div>
                 </div>
                 
                 <p class="mt-2 text-base md:text-justify">
-                    It's a simple chat app. 
-                    You can chat with all registered users in the app. 
-                    Basic authentication and authentication using email. 
-                    It uses WebSocket for two way communication between a client and server
+                    A Django job board API with JWT authentication, role-based access
+                    (employer/applicant), job CRUD with search/filter, application management
+                    with resume upload to MinIO (S3), Celery email notifications, Swagger docs,
+                    and rate limiting. Includes a lightweight Alpine.js frontend.
                 </p>
+
                 <div class="flex mt-2 space-x-2">
-
-                <a x-data x-on:click.stop target="_blank" href="https://github.com/yohi441/personal-chat-app-demo">
-                    <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
-                </a>
-
+                    <a x-data x-on:click.stop href="https://github.com/yohi441/django-job-board-api" target="_blank">
+                        <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                    </a>
+                </div>
                 
             </div>
             
-            </div>
             <!--col-2-->
             <div
                 hx-get="{% url 'portfolio_2' %}"
@@ -137,42 +131,45 @@
 
         </div>
 
-        <div class="opacity-0" x-intersect.half="$store.portfolio.showPortfolio3=true">
-            intersect
-        </div>
 
-        <!--third-->
-        <div
-             x-intersect.half="$store.portfolio.openTab=4"
-            class="flex flex-col mt-9 md:flex-row md:space-x-5">
+        <!-- ==================== PROJECT 3: FastAPI Recipe API ==================== -->
+        <div 
+            x-intersect.half="$store.portfolio.openTab=4"
+            class="flex flex-col mt-9 md:flex-row md:space-x-5"
+        >
             <!--col-1-->
             <div
                 x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio3Col1}"
                 x-intersect.half="$store.portfolio.showPortfolio3Col1=true"
                 class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
             >
-                <h2 class="text-2xl font-semibold text-white md:text-3xl">CovidTracker</h2>
+                <h2 class="text-2xl font-semibold text-white md:text-3xl">Recipe Social API</h2>
                 <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
-                <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">vue.js</div>
-                <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
-                <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">api</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">fastapi</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">python</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">sqlalchemy</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">pydantic</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">jwt</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">celery</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">websocket</div>
+                    <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">docker</div>
                 </div>
                 
                 <p class="mt-2 text-base md:text-justify">
-                This app shows the total cases and total deaths of covid 19 pandemic.
-                You can choose a country to see the total cases and deaths of the selected country.
-                It uses 3rd party API and the basics of Vue.js 
+                    A full-featured recipe social media API built with FastAPI.
+                    Features JWT auth, real-time WebSocket notifications, background
+                    task processing with Celery, S3-compatible file storage via MinIO,
+                    and rate limiting. Includes 35+ automated tests and Docker Compose.
                 </p>
-                
+
                 <div class="flex mt-2 space-x-2">
-                    <a x-on:click.stop x-data href="https://github.com/yohi441/covid-tracker-app-demo" target="_blank">
+                    <a x-data x-on:click.stop href="https://github.com/yohi441/recipe-social-api" target="_blank">
                         <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
                     </a>
-
                 </div>
                 
             </div>
-
+            
             <!--col-2-->
             <div
                 hx-get="{% url 'portfolio_3' %}"
@@ -190,10 +187,371 @@
                     </svg>
                 </div>
             </div>
-        
 
         </div>
-        
+
+
+        <!-- ==================== PROJECT 4: Go REST API ==================== -->
+        <div x-show="$store.portfolio.visible >= 4">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio4Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio4Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">Go URL Shortener</h2>
+                    <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">go</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">golang</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">sqlite</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">rest api</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">jwt</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">swagger</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                       A URL shortener API built with Go. 
+                       Features JWT authentication, user registration/login, URL shortening with 6-character slugs, 
+                       301 redirects, Swagger documentation, and SQLite storage. 
+                       Clean layered architecture with handler, service, and store packages.
+                    </p>
+
+                    <div class="flex mt-2 space-x-2">
+                        <a x-data x-on:click.stop href="https://github.com/yohi441/urlshortener" target="_blank">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+                
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_4' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio4Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio4Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+
+        <!-- ==================== PROJECT 5: Chatapp ==================== -->
+        <div x-show="$store.portfolio.visible >= 5">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio5Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio5Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">Chatapp</h2>
+                    <div class="flex flex-wrap w-64 mt-1 mb-2 overflow-hidden text-xs">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">python</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">htmx</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">alpine.js</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">postgresql</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">redis</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django-channels</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                        It's a simple chat app. 
+                        You can chat with all registered users in the app. 
+                        Basic authentication and authentication using email. 
+                        It uses WebSocket for two way communication between a client and server
+                    </p>
+                    <div class="flex mt-2 space-x-2">
+                        <a x-data x-on:click.stop target="_blank" href="https://github.com/yohi441/personal-chat-app-demo">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_5' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio5Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio5Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>   
+                </div>              
+
+            </div>
+        </div>
+
+
+        <!-- ==================== PROJECT 6: Clinic Manager ==================== -->
+        <div x-show="$store.portfolio.visible >= 6">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio6Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio6Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">Clinic Manager</h2>
+                    <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">htmx</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">alpine.js</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">electron</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">sqlite</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                        An optical clinic management desktop app built with Django and Electron.
+                        Features patient registration, prescription tracking (OD/OS fields),
+                        status workflow (Consultation → Fitting → Production → Ready → Completed),
+                        role-based staff access (Admin, Optometrist, Staff), configurable lens
+                        types, and SQLite backup/restore. Packaged as a native desktop app
+                        with PyInstaller and electron-builder.
+                    </p>
+                    
+                    <div class="flex mt-2 space-x-2">
+                        <a x-on:click.stop x-data href="https://github.com/yohi441/clinic-manager" target="_blank">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_7' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio6Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio6Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ==================== PROJECT 7: Portfolio Site ==================== -->
+        <div x-show="$store.portfolio.visible >= 7">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio7Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio7Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">Portfolio Site</h2>
+                    <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">htmx</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">alpine.js</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">postgresql</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">drf</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                        This portfolio site you're looking at. Built with Django and deployed
+                        on a Raspberry Pi via Cloudflare Tunnel. Features Alpine.js frontend
+                        interactions, lazy-loaded HTMX partials with Tailwind CSS, a contact
+                        form with email integration, and responsive design.
+                    </p>
+                    
+                    <div class="flex mt-2 space-x-2">
+                        <a x-on:click.stop x-data href="https://github.com/yohi441/portfolio-django" target="_blank">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_8' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio7Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio7Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ==================== PROJECT 8: Chick Thermo System ==================== -->
+        <div x-show="$store.portfolio.visible >= 8">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio8Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio8Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">Chick Thermo System</h2>
+                    <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">django</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">htmx</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">iot</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">raspberry pi</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">python</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">sensors</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                        An IoT system that detects fever in chicks via an AMG8833 thermal camera.
+                        Displays live temperature data and alerts on a Django + HTMX dashboard
+                        with Alpine.js. Runs on a Raspberry Pi with sensor integration.
+                    </p>
+                    
+                    <div class="flex mt-2 space-x-2">
+                        <a x-on:click.stop x-data href="https://github.com/yohi441/chick-thermo-system" target="_blank">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_9' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio8Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio8Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ==================== PROJECT 9: CovidTracker ==================== -->
+        <div x-show="$store.portfolio.visible >= 9">
+            <div 
+                x-intersect.half="$store.portfolio.openTab=4"
+                class="flex flex-col mt-9 md:flex-row md:space-x-5"
+            >
+                <!--col-1-->
+                <div
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio9Col1}"
+                    x-intersect.half="$store.portfolio.showPortfolio9Col1=true"
+                    class="md:w-[500px] text-neutral-400 transition-opacity ease-out duration-1000"
+                >
+                    <h2 class="text-2xl font-semibold text-white md:text-3xl">CovidTracker</h2>
+                    <div class="flex flex-wrap mt-1 mb-2 overflow-hidden text-xs w-60">
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">vue.js</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">tailwind</div>
+                        <div class="px-2 mb-1 mr-1 text-red-600 border border-red-600">api</div>
+                    </div>
+                    
+                    <p class="mt-2 text-base md:text-justify">
+                        This app shows the total cases and total deaths of covid 19 pandemic.
+                        You can choose a country to see the total cases and deaths of the selected country.
+                        It uses 3rd party API and the basics of Vue.js 
+                    </p>
+                    
+                    <div class="flex mt-2 space-x-2">
+                        <a x-on:click.stop x-data href="https://github.com/yohi441/covid-tracker-app-demo" target="_blank">
+                            <button class="px-2 py-2 text-sm font-semibold text-red-600 duration-500 border border-red-600 hover:border-white trasition hover:bg-white">Source code</button>
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <!--col-2-->
+                <div
+                    hx-get="{% url 'portfolio_6' %}"
+                    hx-swap="innerHTML"
+                    hx-target="this"
+                    hx-trigger="load"
+                    x-bind:class="{'opacity-0':!$store.portfolio.showPortfolio9Col2}"
+                    x-intersect.half="$store.portfolio.showPortfolio9Col2=true"
+                    class="mt-5 overflow-hidden transition-opacity duration-1000 ease-out md:w-3/4 md:mt-0"
+                >
+                    <div class="flex items-center justify-center w-full h-full">
+                        <svg role="status" class="w-8 h-8 text-gray-600 animate-spin fill-red-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== Load More Button ==================== -->
+        <div class="flex justify-center mt-12">
+            <button 
+                x-show="$store.portfolio.visible < 10"
+                @click="$store.portfolio.visible += 3"
+                class="px-8 cursor-pointer py-3 text-sm font-semibold text-red-600 duration-300 border border-red-600 hover:bg-red-600 hover:text-white hover:border-red-600"
+            >
+                Load More
+            </button>
+        </div>
+
     </div>
 
 </div>
