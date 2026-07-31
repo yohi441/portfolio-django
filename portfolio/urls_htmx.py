@@ -21,11 +21,16 @@ htmx_url_patterns = [
     path('redis/lazy', views_htmx.redis, name="redis_lazy"),
     path('drf/lazy', views_htmx.drf, name="drf_lazy"),
     path('celery/lazy', views_htmx.celery, name="celery_lazy"),
+    path('pytest/lazy', views_htmx.pytest, name="pytest_lazy"),
+    path('jwt/lazy', views_htmx.jwt, name="jwt_lazy"),
     # tools
     path('git/lazy', views_htmx.git, name="git_lazy"),
     path('linux/lazy', views_htmx.linux, name="linux_lazy"),
     path('aws/lazy', views_htmx.aws, name="aws_lazy"),
     path('docker/lazy', views_htmx.docker, name="docker_lazy"),
+    path('nginx/lazy', views_htmx.nginx, name="nginx_lazy"),
+    path('githubactions/lazy', views_htmx.githubactions, name="githubactions_lazy"),
+    path('googlecloud/lazy', views_htmx.googlecloud, name="googlecloud_lazy"),
     # portfolio
     path('portfolio/1/lazy', views_htmx.portfolio_1, name="portfolio_1"),
     path('portfolio/2/lazy', views_htmx.portfolio_2, name="portfolio_2"),

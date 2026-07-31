@@ -17,11 +17,16 @@ postgresql = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/bac
 redis = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/backend/redis_lazy.html")
 drf = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/backend/drf_lazy.html")
 celery = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/backend/celery_lazy.html")
+pytest = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/backend/pytest_lazy.html")
+jwt = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/backend/jwt_lazy.html")
 
 git = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/git_lazy.html")
 linux = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/linux_lazy.html")
 aws = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/aws_lazy.html")
 docker = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/docker_lazy.html")
+nginx = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/nginx_lazy.html")
+githubactions = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/githubactions_lazy.html")
+googlecloud = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/tools/googlecloud_lazy.html")
 
 
 portfolio_1 = LazyLoadingImg.as_view(template_name="htmx_partials_lazy_images/portfolio_1.html")
