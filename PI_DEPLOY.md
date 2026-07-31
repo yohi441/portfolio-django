@@ -205,7 +205,45 @@ cloudflared tunnel list
 cloudflared tunnel info portfolio
 ```
 
-## 11. Troubleshooting
+## 11. CI/CD (GitHub Actions)
+
+On every push to `main`, GitHub Actions runs Django checks + tests, then SSHes into the Pi and runs `deploy.sh`.
+
+### One-time Pi setup
+
+1. Ensure the repo is already cloned at `/home/<user>/portfolio-django` (Section 3).
+2. The deploy user needs passwordless `systemctl restart` for the service:
+
+   ```bash
+   sudo visudo -f /etc/sudoers.d/portfolio
+   ```
+
+   ```
+   <user> ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart portfolio
+   ```
+
+3. `git pull` must work without a password prompt. If the repo is private, set up an SSH key or a [fine-grained PAT](https://github.com/settings/personal-access-tokens) for the deploy user. For a public repo, HTTPS works out of the box.
+4. The workflow file is `.github/workflows/deploy.yml`; the deploy script is `deploy.sh` at the repo root (pulled by git before each run).
+
+### GitHub repository secrets
+
+Create these under **Settings → Secrets and variables → Actions**:
+
+| Secret | Value |
+|--------|-------|
+| `PI_HOST` | The Pi's IP or hostname (e.g. `192.168.x.x`) |
+| `PI_USER` | Deploy user (e.g. `opi`) |
+| `PI_SSH_KEY` | Private SSH key whose public half is in the deploy user's `~/.ssh/authorized_keys` |
+
+> `PI_SSH_KEY` must be an ed25519 key without a passphrase (Actions can't unlock encrypted keys). Generate one with `ssh-keygen -t ed25519` on your desktop, add the `.pub` to the Pi, and paste the private key into the secret.
+
+### Manual deploy
+
+```bash
+gh workflow run deploy.yml
+```
+
+## 12. Troubleshooting
 
 | Problem | Check |
 |---------|-------|
