@@ -1,8 +1,5 @@
 var typed = new Typed(".typed", {
-  strings: [
-    "I'm a backend developer.",
-    "I build things with Python and Django.",
-  ],
+  strings: ["I'm a backend developer.", "I build things with Python"],
   loop: true,
   typeSpeed: 100,
   backSpeed: 50,
