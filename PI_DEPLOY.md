@@ -197,7 +197,9 @@ ssh opi@<pi-tailnet-ip>    # e.g. 100.x.x.x — run `tailscale ip` on the Pi
 # or with MagicDNS: ssh opi@orangepione
 ```
 
-`tailscale up --ssh` enables Tailscale's built-in SSH auth instead of managing keys; plain `tailscale up` just makes the Pi reachable over the tailnet using your existing SSH keys.
+`tailscale up --ssh` / `tailscale set --ssh=true` enables Tailscale's built-in SSH auth instead of managing keys; plain `tailscale up` just makes the Pi reachable over the tailnet using your existing SSH keys.
+
+> For GitHub Actions CI/CD over the tailnet, Tailscale SSH lets the runner log in with **no keys** — it authenticates by its `tag:ci` tailnet identity. Keep `tailscale set --ssh=true` on and grant `tag:ci` access in the ACL (Section 11).
 
 ## 8. Security
 
@@ -263,6 +265,7 @@ On every push to `main`, GitHub Actions runs Django checks + tests, then SSHes i
 
 3. `git pull` must work without a password prompt. If the repo is private, set up an SSH key or a [fine-grained PAT](https://github.com/settings/personal-access-tokens) for the deploy user. For a public repo, HTTPS works out of the box.
 4. The workflow file is `.github/workflows/deploy.yml`; the deploy script is `deploy.sh` at the repo root (pulled by git before each run).
+5. Tailscale SSH must be enabled on the Pi: `sudo tailscale set --ssh=true`. The runner authenticates by Tailscale identity — no SSH keys needed (see secrets below).
 
 ### GitHub repository secrets
 
@@ -270,11 +273,23 @@ Create these under **Settings → Secrets and variables → Actions**:
 
 | Secret | Value |
 |--------|-------|
-| `PI_HOST` | The Pi's IP or hostname (e.g. `192.168.x.x`) |
+| `TS_OAUTH_CLIENT_ID` | OAuth client ID from login.tailscale.com/admin/settings/oauth |
+| `TS_OAUTH_SECRET` | OAuth client secret for the same client |
+| `PI_HOST` | The Pi's **tailnet IP** (e.g. `100.x.x.x` — run `tailscale ip` on the Pi) |
 | `PI_USER` | Deploy user (e.g. `opi`) |
-| `PI_SSH_KEY` | Private SSH key whose public half is in the deploy user's `~/.ssh/authorized_keys` |
 
-> `PI_SSH_KEY` must be an ed25519 key without a passphrase (Actions can't unlock encrypted keys). Generate one with `ssh-keygen -t ed25519` on your desktop, add the `.pub` to the Pi, and paste the private key into the secret.
+> This setup uses **Tailscale SSH — no SSH keys at all**. The runner joins the tailnet as an ephemeral `tag:ci` node and authenticates by Tailscale identity. Create the OAuth client at login.tailscale.com/admin/settings/oauth (scopes: Devices Core Write + Keys Auth Keys Write, tag: `tag:ci`), then add the rules below to the ACL (one.dash.cloudflare.com → Access controls → ACL) so `tag:ci` can SSH to the Pi:
+
+```json
+"grants": [
+  { "src": ["tag:ci"], "dst": ["<pi-tailnet-ip>"], "ip": ["*"] }
+],
+"ssh": [
+  { "action": "accept", "src": ["tag:ci"], "dst": ["<pi-tailnet-ip>"], "users": ["root", "autogroup:nonroot"] }
+]
+```
+
+> If you prefer classic SSH keys instead, keep a `PI_SSH_KEY` secret (ed25519, no passphrase) whose public half is in the deploy user's `~/.ssh/authorized_keys`.
 
 ### Manual deploy
 
@@ -295,4 +310,6 @@ gh workflow run deploy.yml
 | `ModuleNotFoundError: No module named 'cgi'` | Installed Django too old for Python 3.13 — `pip install --upgrade django` (needs >= 5.1) |
 | `Permission denied: '/root'` | `python-decouple` can't find `.env` — make sure `Environment=HOME=/home/<user>/portfolio-django` is set in the service and the `.env` file exists |
 | `No module named 'pkg_resources'` | Recreate venv or `pip install --upgrade gunicorn` |
+| `tailnet policy does not permit you to SSH to this node` | Tailscale SSH reached the Pi but the ACL denies `tag:ci` — add the `grants` + `ssh` rules for `tag:ci` → Pi (Section 11) |
+| `Permission denied (publickey,password)` over the tailnet | Tailscale SSH is off on the Pi — `sudo tailscale set --ssh=true` |
 | Permission denied writing files | Project must be owned by the deploy user: `sudo chown -R <user>:<user> /home/<user>/portfolio-django` |
