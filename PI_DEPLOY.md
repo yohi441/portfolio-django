@@ -44,7 +44,7 @@ Create `/home/<user>/portfolio-django/.env` (as the deploy user, not root):
 ```
 SECRET_KEY=<your-django-secret-key>
 DEBUG=False
-ALLOWED_HOSTS=localhost,yourdomain.com
+ALLOWED_HOSTS=localhost,portfolio.yourdomain.com
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_HOST_USER=your@email.com
@@ -97,7 +97,7 @@ Create `/etc/nginx/sites-available/portfolio`:
 ```nginx
 server {
     listen 80;
-    server_name yourdomain.com;
+    server_name portfolio.yourdomain.com;
 
     client_max_body_size 10M;
 
@@ -124,41 +124,80 @@ sudo systemctl enable --now nginx
 
 ## 7. Cloudflare Tunnel
 
-Install `cloudflared`:
+> **Orange Pi One note:** the Orange Pi One runs the Allwinner H3 (Cortex-A7, 32-bit ARMv7). Install the **32-bit** `cloudflared-linux-arm` binary — the `arm64` build fails with `Exec format error`.
+
+### 7.1 Full DNS setup (required for tunnel routing)
+
+The tunnel's Public Hostname route must be configured in the Cloudflare dashboard, which requires the domain to be an **active zone** in your Cloudflare account:
+
+1. dash.cloudflare.com → **Add a site** → **Connect a domain** → enter your domain → **Free** plan.
+2. Cloudflare scans your DNS records. No changes needed — but if you have email on the domain, keep any MX/SPF/DMARC/DKIM records.
+3. Copy the **2 nameservers** Cloudflare shows you.
+4. At your registrar (e.g. Hostinger hPanel → Domains → your domain → **Nameservers**), replace the registrar's nameservers with Cloudflare's 2 nameservers.
+5. Wait for the zone to show **Active** in Cloudflare (usually ~15 min, up to 24 h).
+
+### 7.2 Install the connector (token method)
 
 ```bash
-curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64 -o /usr/local/bin/cloudflared
+curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm -o /usr/local/bin/cloudflared
 chmod +x /usr/local/bin/cloudflared
+cloudflared --version
 ```
 
-Authenticate & create tunnel:
+> With the token method there is **no** `cloudflared tunnel login` / `tunnel create` / `config.yml`. The connector fetches its config from Cloudflare, so the token is the only credential you need.
+
+### 7.3 Create the tunnel & get the token
+
+1. Zero Trust (one.dash.cloudflare.com) → **Networks → Tunnels** → **Create a tunnel** → give it a name.
+2. Copy the **token** (starts with `eyJ...`) — it is shown only once and embeds the tunnel ID + credentials.
+3. On the Pi:
 
 ```bash
-cloudflared tunnel login
-cloudflared tunnel create portfolio
-cloudflared tunnel route dns portfolio yourdomain.com
-```
-
-Create `~/.cloudflared/config.yml`:
-
-```yaml
-tunnel: <tunnel-id>
-credentials-file: /home/<user>/.cloudflared/<tunnel-id>.json
-
-ingress:
-  - hostname: yourdomain.com
-    service: http://localhost:80
-  - service: http_status:404
-```
-
-Install as systemd service:
-
-```bash
-sudo cloudflared service install
+sudo cloudflared service install <TOKEN>
 sudo systemctl enable --now cloudflared
 ```
 
-**Security note:** Once the tunnel is working, disable direct port 80 access by removing nginx listen or binding to localhost only. The tunnel routes through Cloudflare's edge — no public ports needed.
+The tunnel shows **Healthy** once the connector connects. To find the tunnel ID later: Zero Trust → Networks → Tunnels → tunnel → **Overview**, or `cat /etc/cloudflared/config.yml` on the Pi.
+
+### 7.4 Route your subdomain
+
+Once the zone is **Active**:
+
+1. Zero Trust → **Networks → Tunnels** → your tunnel → **Public Hostname** → **Add a public hostname**.
+2. Subdomain: `portfolio` · Domain: your domain · Type: **HTTP** · URL: **`http://localhost:80`**.
+3. Cloudflare auto-creates the DNS CNAME and a free SSL certificate.
+
+> **502 Bad Gateway?** The Public Hostname Service URL must be `http://localhost:80` (HTTP, port 80). If it's `https://localhost`, port 443, or the domain itself, requests fail with 502 even when the origin works.
+
+### 7.5 Point the app at the subdomain
+
+- Nginx: `server_name portfolio.yourdomain.com;` → `sudo nginx -t && sudo systemctl reload nginx`
+- `.env`: `ALLOWED_HOSTS=localhost,portfolio.yourdomain.com` → `sudo systemctl restart portfolio`
+
+**Security note:** with the tunnel active, public traffic only reaches the Pi through Cloudflare's edge. UFW's default *deny incoming* (Section 8) blocks direct port 80 access — exactly what you want. No public ports needed.
+
+### 7.6 Tailscale (optional — remote SSH from anywhere)
+
+Tailscale builds a private WireGuard mesh between your devices (free personal plan: 100 devices / 3 users, ~15–40 MiB RAM). Use it to SSH from outside the LAN without exposing port 22.
+
+```bash
+# On the Pi
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+# Open the printed URL and sign in with your account
+
+# Allow the tailnet through UFW (default is deny incoming)
+sudo ufw allow in on tailscale0 to any port 22 proto tcp
+```
+
+On your client device, install Tailscale and sign in with the **same account**. Then SSH from anywhere:
+
+```bash
+ssh opi@<pi-tailnet-ip>    # e.g. 100.x.x.x — run `tailscale ip` on the Pi
+# or with MagicDNS: ssh opi@orangepione
+```
+
+`tailscale up --ssh` enables Tailscale's built-in SSH auth instead of managing keys; plain `tailscale up` just makes the Pi reachable over the tailnet using your existing SSH keys.
 
 ## 8. Security
 
@@ -247,9 +286,11 @@ gh workflow run deploy.yml
 
 | Problem | Check |
 |---------|-------|
-| 502 Bad Gateway | `sudo systemctl status portfolio`, `journalctl -u portfolio -n 20` |
-| Static files 404 | `ls /home/<user>/portfolio-django/staticfiles/`, nginx static alias path |
-| Domain not loading | `cloudflared tunnel list`, `cloudflared tunnel route list` |
+| 502 Bad Gateway (origin) | `sudo systemctl status portfolio`, `journalctl -u portfolio -n 20` |
+| Tunnel 502 / Host error | Public Hostname Service URL must be `http://localhost:80`; verify origin with `curl -I http://localhost/` on the Pi |
+| Domain not loading | Zero Trust → Networks → Tunnels → tunnel status **Healthy**; check the zone is **Active** and the Public Hostname is configured |
+| `Exec format error` on cloudflared | 32-bit Pi installed the `arm64` binary — install `cloudflared-linux-arm` |
+| `cloudflared tunnel list` cert.pem error | Expected with token tunnels (no cert.pem) — get the tunnel ID from the dashboard or `cat /etc/cloudflared/config.yml` |
 | Email not sending | Check `.env` credentials, port 587 outbound |
 | `ModuleNotFoundError: No module named 'cgi'` | Installed Django too old for Python 3.13 — `pip install --upgrade django` (needs >= 5.1) |
 | `Permission denied: '/root'` | `python-decouple` can't find `.env` — make sure `Environment=HOME=/home/<user>/portfolio-django` is set in the service and the `.env` file exists |
