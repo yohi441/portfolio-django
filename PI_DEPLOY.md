@@ -278,16 +278,22 @@ Create these under **Settings → Secrets and variables → Actions**:
 | `PI_HOST` | The Pi's **tailnet IP** (e.g. `100.x.x.x` — run `tailscale ip` on the Pi) |
 | `PI_USER` | Deploy user (e.g. `opi`) |
 
-> This setup uses **Tailscale SSH — no SSH keys at all**. The runner joins the tailnet as an ephemeral `tag:ci` node and authenticates by Tailscale identity. Create the OAuth client at login.tailscale.com/admin/settings/oauth (scopes: Devices Core Write + Keys Auth Keys Write, tag: `tag:ci`), then add the rules below to the ACL (one.dash.cloudflare.com → Access controls → ACL) so `tag:ci` can SSH to the Pi:
+> This setup uses **Tailscale SSH — no SSH keys at all**. The runner joins the tailnet as an ephemeral `tag:ci` node and authenticates by Tailscale identity. Create the OAuth client at login.tailscale.com/admin/settings/oauth (scopes: Devices Core Write + Keys Auth Keys Write, tag: `tag:ci`), then add the rules below to the ACL (one.dash.cloudflare.com → Access controls → ACL) so `tag:ci` can SSH to the Pi. The Pi must be tagged `tag:pi` (see below) — **SSH rule destinations must be tags, not IPs or hostnames** (`Error: invalid dst` otherwise):
 
 ```json
 "grants": [
-  { "src": ["tag:ci"], "dst": ["<pi-tailnet-ip>"], "ip": ["*"] }
+  { "src": ["*"], "dst": ["*"], "ip": ["*"] }
 ],
+"tagOwners": {
+  "tag:ci": ["autogroup:admin"],
+  "tag:pi": ["autogroup:admin"]
+},
 "ssh": [
-  { "action": "accept", "src": ["tag:ci"], "dst": ["<pi-tailnet-ip>"], "users": ["root", "autogroup:nonroot"] }
+  { "action": "accept", "src": ["tag:ci"], "dst": ["tag:pi"], "users": ["root", "autogroup:nonroot"] }
 ]
 ```
+
+> Apply the tag on the Pi: `sudo tailscale up --advertise-tags=tag:pi --ssh` (mention `--ssh` too — it's non-default), approve the Re-authentication URL, and confirm with `tailscale status` that the Pi shows `tag:pi`. See the troubleshooting section for the full sequence.
 
 > If you prefer classic SSH keys instead, keep a `PI_SSH_KEY` secret (ed25519, no passphrase) whose public half is in the deploy user's `~/.ssh/authorized_keys`.
 
@@ -298,6 +304,44 @@ gh workflow run deploy.yml
 ```
 
 ## 12. Troubleshooting
+
+### Tailscale SSH: runner can't connect ("tailnet policy does not permit you to SSH to this node")
+
+Tailscale rejects IPs and hostnames as `dst` in SSH rules (`Error: invalid dst`) — SSH destinations must be **tags**. The runner authenticates by its `tag:ci` identity. Fix in this order:
+
+1. Define the Pi's tag in the ACL — `tag:pi` must exist in `tagOwners` *before* it's referenced, or you get `Error: tag not found: "tag:pi"`:
+
+   ```json
+   "tagOwners": {
+       "tag:ci": ["autogroup:admin"],
+       "tag:pi": ["autogroup:admin"]
+   }
+   ```
+
+2. Add the SSH rule (src `tag:ci` → dst `tag:pi`), save, and verify with the Preview button:
+
+   ```json
+   "ssh": [
+       { "action": "accept", "src": ["tag:ci"], "dst": ["tag:pi"], "users": ["autogroup:nonroot", "root"] }
+   ]
+   ```
+
+3. Apply the tag on the Pi — **must use `tailscale up`, not `tailscale set`** (`set` has no tag flag: `flag provided but not defined: -advertise-tags`), and mention all non-default flags or it refuses:
+
+   ```bash
+   sudo tailscale up --advertise-tags=tag:pi --ssh
+   # if you forget --ssh: "changing settings via 'tailscale up' requires
+   # mentioning all non-default flags" → re-run with --ssh added
+   ```
+
+   Approve any Re-authentication URL it prints (instant as admin).
+
+4. Verify the tag landed, then re-run the deploy:
+
+   ```bash
+   tailscale status   # Pi line must end with tag:pi
+   gh workflow run deploy.yml
+   ```
 
 | Problem | Check |
 |---------|-------|
@@ -310,6 +354,6 @@ gh workflow run deploy.yml
 | `ModuleNotFoundError: No module named 'cgi'` | Installed Django too old for Python 3.13 — `pip install --upgrade django` (needs >= 5.1) |
 | `Permission denied: '/root'` | `python-decouple` can't find `.env` — make sure `Environment=HOME=/home/<user>/portfolio-django` is set in the service and the `.env` file exists |
 | `No module named 'pkg_resources'` | Recreate venv or `pip install --upgrade gunicorn` |
-| `tailnet policy does not permit you to SSH to this node` | Tailscale SSH reached the Pi but the ACL denies `tag:ci` — add the `grants` + `ssh` rules for `tag:ci` → Pi (Section 11) |
+| `tailnet policy does not permit you to SSH to this node` | Tailscale SSH reached the Pi but the ACL denies `tag:ci` — the SSH `dst` must be `tag:pi` (not an IP/hostname); add the accept rule and ensure `tagOwners` defines `tag:pi` (see above) |
 | `Permission denied (publickey,password)` over the tailnet | Tailscale SSH is off on the Pi — `sudo tailscale set --ssh=true` |
 | Permission denied writing files | Project must be owned by the deploy user: `sudo chown -R <user>:<user> /home/<user>/portfolio-django` |

@@ -47,5 +47,5 @@ jobs:
         env:
           PI_HOST: ${{ secrets.PI_HOST }}
           PI_USER: ${{ secrets.PI_USER }}
-        run: ssh -o StrictHostKeyChecking=accept-new "$PI_USER@$PI_HOST" 'cd ~/portfolio-django && git pull --ff-only && bash ~/portfolio-django/deploy.sh'
+        run: ssh -o StrictHostKeyChecking=accept-new "$PI_USER@$PI_HOST" 'bash ~/portfolio-django/deploy.sh'
 
